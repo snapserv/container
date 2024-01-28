@@ -1,0 +1,17 @@
+#!/command/with-contenv /bin/bash
+# shellcheck shell=bash
+set -euo pipefail
+IFS=$'\n\t'
+
+main() {
+    local -r cache_store="${EMAILPROXY_CACHE_STORE}"
+
+    exec emailproxy \
+        --no-gui \
+        --external-auth \
+        --cache-store "${cache_store}" \
+        --config-file "/tmp/emailproxy.config" \
+        "$@"
+}
+
+main "$@"

@@ -1,0 +1,12 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+main() {
+    local -r template_path="${1}"
+    local -r output_path="${2}"
+
+    envsubst <"${template_path}" >"${output_path}"
+}
+
+main "$@"

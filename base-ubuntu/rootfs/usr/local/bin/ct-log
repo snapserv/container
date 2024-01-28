@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+main() {
+    local timestamp
+    local -r format="${1}"; shift
+
+    timestamp=$(date +"%Y-%m-%dT%H:%M:%S%z")
+    printf "[%s] ${format}\n" "${timestamp}" "$@"
+}
+
+main "$@"

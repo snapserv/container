@@ -1,0 +1,16 @@
+#!/command/with-contenv /bin/bash
+# shellcheck shell=bash
+set -euo pipefail
+IFS=$'\n\t'
+
+main() {
+    local -r config_file="${EMAILPROXY_CONFIG_FILE}"
+
+    if [[ ! -r "${config_file}" ]]; then
+        ct-fatal "Could not read config file [%s] for emailproxy" "${config_file}"
+    fi
+
+    ct-envsubst "${config_file}" /tmp/emailproxy.config
+}
+
+main "$@"

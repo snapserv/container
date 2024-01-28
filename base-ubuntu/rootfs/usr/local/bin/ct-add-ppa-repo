@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+main() {
+    local -r ppa_name="${1}"
+    local -r ppa_key="${2}"
+    local -r ppa_list_file="/etc/apt/sources.list.d/${ppa_name//\//-}.list"
+
+    echo "deb https://ppa.launchpadcontent.net/${ppa_name}/ubuntu $(lsb_release -sc) main" >"${ppa_list_file}"
+    echo "deb-src https://ppa.launchpadcontent.net/${ppa_name}/ubuntu $(lsb_release -sc) main" >>"${ppa_list_file}"
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys "${ppa_key}"
+}
+
+main "$@"
