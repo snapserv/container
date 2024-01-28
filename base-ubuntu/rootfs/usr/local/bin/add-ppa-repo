@@ -1,0 +1,9 @@
+#!/bin/bash
+readonly PPA_NAME="${1}"
+readonly PPA_KEY="${2}"
+readonly PPA_LIST_FILE="/etc/apt/sources.list.d/${PPA_NAME//\//-}.list"
+
+echo "deb https://ppa.launchpadcontent.net/${PPA_NAME}/ubuntu $(lsb_release -sc) main" >"${PPA_LIST_FILE}"
+echo "deb-src https://ppa.launchpadcontent.net/${PPA_NAME}/ubuntu $(lsb_release -sc) main" >>"${PPA_LIST_FILE}"
+cat "${PPA_LIST_FILE}"
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys "${PPA_KEY}"

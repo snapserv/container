@@ -1,0 +1,3 @@
+#!/command/execlineb -P
+elglob -0 FILES /var/tmp/nginx/*
+rm -rf -- $(FILES)
